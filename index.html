@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Your Blog — Latest Insights</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Professional, data-driven finance articles on portfolios, taxes, markets, crypto, and more." />
+  <style>
+    :root{ --bg:#090c12; --card:#121826; --muted:#9aa6b2; --text:#e7ecf2; --accent:#7aa2ff; --accent-2:#7fe3c3; --border:#1d2635; }
+    html,body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.65}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 80px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    h1{font-size:1.9rem;margin:0}
+    .subtitle{color:var(--muted);margin:6px 0 0;font-size:.98rem}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:12px;text-decoration:none}
+    .hr{height:1px;background:var(--border);margin:22px 0}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{grid-column:span 12;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:8px}
+    @media(min-width:760px){.card{grid-column:span 6}}
+    .title{font-size:1.1rem;margin:0}
+    .meta{color:var(--muted);font-size:.9rem;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .tag{display:inline-block;background:var(--accent-2);color:#0b0e13;padding:2px 8px;border-radius:999px;font-size:.75rem}
+    .summary{margin:6px 0 0;color:#d7ddea}
+    .read{margin-top:8px;display:inline-flex;gap:8px;align-items:center;color:var(--accent);text-decoration:none}
+    .read:hover{text-decoration:underline}
+    .empty,.error{background:var(--card);border:1px solid var(--border);padding:18px;border-radius:16px;color:var(--muted)}
+    footer{margin-top:36px;color:var(--muted);font-size:.9rem}
+    .pill{border:1px solid var(--border);border-radius:999px;padding:2px 8px;font-size:.8rem;color:var(--muted)}
+    .header-right{display:flex;gap:8px;align-items:center}
+    .search{background:var(--card);border:1px solid var(--border);padding:8px 12px;border-radius:12px;color:var(--text);min-width:220px}
+  </style>
+
+  <!-- One single script, deferred so DOM exists -->
+  <script defer>
+    (function(){
+      // Grab elements after DOM is parsed (defer ensures these exist)
+      const yearEl   = document.getElementById('year');
+      const listEl   = document.getElementById('list');
+      const tpl      = document.getElementById('card-tpl');
+      const statusEl = document.getElementById('status');
+      const searchEl = document.getElementById('q');
+
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      function formatDate(iso){
+        // Render using local time; pass date-only safely
+        const d = new Date(iso + 'T00:00:00');
+        return d.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+      }
+      function readMinutes(words){ return Math.max(2, Math.round((words || 1200)/225)); }
+
+      let ALL = [];
+      let FILTERED = [];
+
+      async function fetchJSON(paths){
+        for (const p of paths) {
+          try {
+            const res = await fetch(p, { cache: 'no-store' });
+            if (!res.ok) continue;
+            return await res.json();
+          } catch(_) { /* try next */ }
+        }
+        throw new Error('All fetch attempts failed');
+      }
+
+      async function loadArticles(){
+        if (statusEl){ statusEl.hidden = false; statusEl.textContent = 'Loading…'; }
+        try{
+          // Try relative first; last resort is absolute root
+          const data = await fetchJSON(['./articles.json','articles.json','/articles.json']);
+          if (!Array.isArray(data)) throw new Error('JSON root is not an array');
+
+          ALL = data
+            .filter(a => a && a.date && a.title && a.url)
+            .sort((a,b) => new Date(b.date) - new Date(a.date));
+
+          FILTERED = ALL;
+          render();
+          if (statusEl) statusEl.hidden = true;
+        }catch(e){
+          console.error(e);
+          if (statusEl){
+            statusEl.hidden = false;
+            statusEl.className = 'error';
+            statusEl.textContent = 'Could not load articles.json. Ensure the file exists, is valid JSON, and is served over HTTP.';
+          }
+        }
+      }
+
+      function render(){
+        if (!listEl || !tpl) return;
+        listEl.innerHTML = '';
+        const top = FILTERED.slice(0,5);
+        if(!top.length){
+          if (statusEl){ statusEl.hidden = false; statusEl.textContent = 'No articles yet.'; }
+          return;
+        }
+        if (statusEl) statusEl.hidden = true;
+
+        for(const a of top){
+          const node = tpl.content.cloneNode(true);
+          node.querySelector('.title').textContent = a.title;
+          node.querySelector('.date').textContent = formatDate(a.date);
+          node.querySelector('.summary').textContent = a.summary || '';
+          node.querySelector('.read').href = a.url;
+          node.querySelector('.readtime').textContent = (a.readingMinutes ?? readMinutes(a.words)) + ' min read';
+          const tags = (a.tags||[]).map(t=>`<span class="tag">${t}</span>`).join(' ');
+          node.querySelector('.tags').innerHTML = tags || '<span class="tag">Article</span>';
+          listEl.appendChild(node);
+        }
+      }
+
+      if (searchEl){
+        searchEl.addEventListener('input', (e)=>{
+          const q = e.target.value.trim().toLowerCase();
+          FILTERED = !q ? ALL : ALL.filter(a =>
+            (a.title||'').toLowerCase().includes(q) ||
+            (a.tags||[]).some(t => (t||'').toLowerCase().includes(q))
+          );
+          render();
+        });
+      }
+
+      loadArticles();
+    })();
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Latest Insights</h1>
+        <p class="subtitle">Five most recent articles · auto-updating from <code>articles.json</code></p>
+      </div>
+      <div class="header-right">
+        <span class="pill">Dark mode</span>
+        <input id="q" class="search" type="search" placeholder="Search titles & tags…" aria-label="Search" />
+      </div>
+    </header>
+
+    <div class="hr"></div>
+
+    <section id="list" class="grid" aria-live="polite"></section>
+
+    <template id="card-tpl">
+      <article class="card">
+        <h2 class="title"></h2>
+        <div class="meta">
+          <span class="date"></span>
+          <span class="dot">•</span>
+          <span class="tags"></span>
+          <span class="dot">•</span>
+          <span class="readtime"></span>
+        </div>
+        <p class="summary"></p>
+        <a class="read" target="_self" rel="noopener">Read article →</a>
+      </article>
+    </template>
+
+    <div id="status" class="empty" hidden>Loading…</div>
+
+    <footer>
+      © <span id="year"></span> Your Brand · <a href="/rss.xml">RSS</a> · <a href="/sitemap.xml">Sitemap</a>
+    </footer>
+  </div>
+</body>
+</html>
