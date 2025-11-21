@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Articles - Engineering Success Insights</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Articles</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="articles.html">Articles</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </header>
+
+        <main id="articles-list"></main>
+
+        <script>
+            fetch('articles.json')
+                .then(response => response.json())
+                .then(articles => {
+                    const container = document.getElementById('articles-list');
+                    articles.forEach(article => {
+                        const div = document.createElement('div');
+                        div.innerHTML = `
+                            <h2><a href="${article.link}">${article.title}</a></h2>
+                            <p><em>${article.date}</em></p>
+                            <p>${article.summary}</p>
+                        `;
+                        container.appendChild(div);
+                    });
+                })
+                .catch(err => console.error('Error laoding articles:', err));
+        </script>
+    </body>
+</html>
