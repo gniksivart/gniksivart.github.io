@@ -1,0 +1,93 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	background-color: #f0f2f5;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.navbar {
+	background-color: #ffffff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2 rem;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.site-title {
+	margin: 0;
+	font-size: 1.5rem;
+}
+
+.site-title a {
+	text-decoration: none;
+	color: #1e293b;
+}
+
+.nav-links {
+	list-style: none;
+	display: flex;
+	gap: 1.5rem;
+	margin: 0;
+	padding: 0;
+}
+
+.nav-links a {
+	text-decoration: none;
+	color: #6478b;
+	font-weight: 600;
+	transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+	color: #2563eb;
+}
+
+.main-content {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.card {
+	background: white;
+	padding: 2rem;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+#count {
+	font-size: 4rem;
+	font-weight: bold;
+	color: #2563eb;
+	margin: 1rem 0;
+}
+
+button {
+	padding: 0.75rem 1.5rem;
+	font-size: 1rem;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	margin: 0 5px;
+	transition: background 0.2s;
+}
+
+#click-btn {
+	background-color: #2563eb;
+	color: white;
+}
+
+#click-btn:hover {
+	background-color: #e5e7eb;
+	color: #374151;
+}
+
+#reset-btn:hover {
+	background-color: #d1d5db;
+}
