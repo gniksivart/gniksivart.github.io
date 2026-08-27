@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Engineering Hope</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<header class="navbar">
+		<h2 class="site-title"><a href=index.html>Engineering Hope</a></h2>
+		<nav>
+			<ul class="nav-links">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="about.html">About Me</a></li>
+				<li><a href="blog.html">Blog</a></li>
+				<li><a href="game.html" class="active">Games</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h1>Getting Work Dun</h1>
+	<p>The most important thing to know / learn as a new hire engineer is how to get work done, or D-U-N done as my co-worker used to say.</p>
+	<h1>CMMS - Computerized Maintenance Management System</h1>
+	<p> CMMS is just a fancy way to say the program that a company uses to turn a work request into a finished product and all the steps in between. The most common CMMS systems are SAP, Maximo, and MaintanX. In this article, I'm going to cover the steps / process specific to SAP, but it should be pretty similar for all other programs as well.</p>
+
+	<h1>Writing a Notification</h1>
+	<p>You're 2-3 months into your first job and are completing a morning walk through of your unit. You come across a pump that is leaking and instead of dumping it off onto someone else, you decide to log into your CMMS system to write a notification get the pump leak fixed</p>
+	<h3>What to Include</h3>
+	<p>You get back to your desk and log into your CMMS system and click create notification. When writing a notification it's as simple as Who, What, Where, When, Why</p>
+	<ul>
+		<li>Who - for SAP this is the name and the SAP Equipment number for the pump. </a></li>
+		<li>What - this is pretty self explanatory, but also important. What is leaking on the pump, is it process, oil, cooling water, or something else?</li>
+    <li>Where - this is twofold. Where is it leaking on the pump? Is it leaking from the mechanical seal, bearing housing, pump case, or the suction/discharge flanges (in unsure I've found attaching a few photos to the 
+      notification can be very helpful)? It's also important to include where the pump is at which is why the function location is important</li>
+    <li>When - did you find the leak and when does it need to be fixed? Does this need to be fixed same day, in two weeks, or anytime as long as the leak doesn't get worse.</li>
+    <li>Why - why does the pump need to be fixed in that time period. It presents a safety issue, it's in the LDAR program and needs to be addressed in two weeks, or it's a small leak that can be completed any time.
+      Any additional information you can include here will help with everyone you work with</li>
+  </ul>
+
+  <h1>Communicate with the Team</h1>
+    <h2>Gatekeeper</h2>
+      <p>Most place I've worked with have a Gatekeeper. This person reviews all Notifications to see if all the information needed is included. If it is, that person will then flip the Notification into a Work Order, if not
+        he's supposed to follow up with the person who wrote the Notification and request additional information.</p>
+    <h2>Planner</h2>
+      <p>In some of the best companies I've worked for, this person is usually an "experienced" mechanic who knows the jobs and can input what steps, crafts, materials (everything from bolts and gaskets to cranes and scaffolds)
+        and how much time will be needed to complete the job</p>
+    <h2>Material Coordinator</h2>
+      <p>This position is usually rare or may be included as a task for the planner. This person orders all the materials so they can come in on a timely manner and usually "kits" the jobs either the day/week before. He will
+        verify all ordered parts have arrived on plant, and then go into stores and pull the parts needed and charge them to the WO in SAP. This allows the mechanic the day of the job, to be more efficient and ideally grab
+        the kit and get to work</p>
+    <h2>Scheduler</h2>
+      <p>This person looks at available hours of all site crafts/personnel which could include, but is not limited to, mechanical maintenance, electrical maintenance, scaffold builders, insulators, etc. and begins to pull in 
+        work based on Notification priority, or feedback from operations and/or maintenance personnel. Most sites usually schedule something over 100% like 110% in case operations can't get a job ready, parts can't be found, or 
+        one of the many other reasons a job may not get completed</p>
+
+</body>
+</html>
