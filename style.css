@@ -7,7 +7,7 @@
 }
 
 .site-title {
-	margin: 0;
+	margin: 0rem 0rem 0rem 2rem;
 	font-size: 1.5rem;
 }
 
@@ -20,6 +20,68 @@
 	list-style: none;
 	display: flex;
 	gap: 1.5rem;
-	margin: 0;
+	margin: 0rem 2rem 0rem 0rem;
 	padding: 0;
+}
+
+.game-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Layout containers */
+.resource-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Individual shop rows */
+.shop-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.stat-text {
+    margin: 0;
+}
+
+/* Helper for screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.resource-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Two equal columns per row */
+.shop-row {
+    display: grid;
+    grid-template-columns: auto auto; /* Auto width instead of equal halves */
+    justify-content: start;            /* Pulls both columns to the left */
+    gap: 3rem;                       /* Adjust this number to control space between columns */
+    align-items: center;
+}
+
+/* Button + Text inline alignment */
+.shop-col {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.stat-text {
+    margin: 0;
 }
