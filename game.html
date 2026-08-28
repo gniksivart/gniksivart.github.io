@@ -1,34 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Engineering Hope</title>
-	<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Hope | Games</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-	<header class="navbar">
-		<h2 class="site-title"><a href=index.html>Engineering Hope</a></h2>
-		<nav>
-			<ul class="nav-links">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="about.html">About Me</a></li>
-				<li><a href="blog.html">Blog</a></li>
-				<li><a href="game.html" class="active">Games</a></li>
-			</ul>
-		</nav>
-	</header>
+<header class="navbar">
+        <h1 class="site-title"><a href="index.html">Engineering Hope</a></h1>
+        <nav aria-label="Main Navigation">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="game.html" class="active" aria-current="page">Games</a></li>
+            </ul>
+        </nav>
+    </header>
 
-	<div class ="card">
-		<h1>Click Counter</h1>
-		<div id="count">0</div>
-		<div class ="button-group">
-			<button id="click-btn">Click Me!</button>
-			<button id="reset-btn">Reset</button>
-		</div>
-	</div>
+<main class="game-container">
+    <section class="resource-section">
+        <h2 class="visually-hidden">Game Resources & Actions</h2>
 
-	<script src="script.js"></script>
+        <!-- Gold Row -->
+        <div class="shop-row">
+            <div class="shop-col">
+                <button id="find-gold-btn" type="button">Find Gold!</button> 
+                <p class="stat-text">Gold = <span id="gold-count">0</span></p>   
+            </div>
+            <div class="shop-col">
+                <!-- Empty second column for alignment -->
+            </div>
+        </div>
+
+        <!-- Axe Row -->
+        <div class="shop-row">
+            <div class="shop-col">
+                <button id="buy-axe-btn" type="button">Buy Axe</button>    
+                <p class="stat-text">Durability - <span id="axe-count">0</span></p>
+            </div>
+            <div class="shop-col">
+                <button id="chop-wood-btn" type="button">Chop Wood</button>
+                <p class="stat-text">Wood = <span id="wood-count">0</span></p>
+            </div>
+        </div>
+
+        <!-- Pickaxe Row -->
+        <div class="shop-row">
+            <div class="shop-col">
+                <button id="buy-pickaxe-btn" type="button">Buy Pickaxe</button>    
+                <p class="stat-text">Durability - <span id="pickaxe-count">0</span></p>
+            </div>
+            <div class="shop-col">
+                <!-- Ready for future mining action -->
+            </div>
+        </div>
+
+        <!-- Knife Row -->
+        <div class="shop-row">
+            <div class="shop-col">
+                <button id="buy-knife-btn" type="button">Buy Knife</button>    
+                <p class="stat-text">Durability - <span id="knife-count">0</span></p>
+            </div>
+            <div class="shop-col">
+                <!-- Ready for future hunting/crafting action -->
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="reset-btn" type="button">Reset</button>
+        </div>
+    </section>
+</main>
+
+    <script src="script.js"></script>
 </body>
 </html>
