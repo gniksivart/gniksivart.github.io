@@ -1,19 +1,9 @@
-body {
-	font-family: Arial, sans-serif;
-	margin: 0;
-	background-color: #f0f2f5;
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-}
-
 .navbar {
 	background-color: #ffffff;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 1rem 2 rem;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .site-title {
@@ -32,11 +22,4 @@ body {
 	gap: 1.5rem;
 	margin: 0;
 	padding: 0;
-}
-
-.main-content {
-	flex: 1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
