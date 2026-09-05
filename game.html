@@ -9,16 +9,16 @@
 <body>
 
 <header class="navbar">
-        <h1 class="site-title"><a href="index.html">Engineering Hope</a></h1>
-        <nav aria-label="Main Navigation">
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Me</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="game.html" class="active" aria-current="page">Games</a></li>
-            </ul>
-        </nav>
-    </header>
+    <h1 class="site-title"><a href="index.html">Engineering Hope</a></h1>
+    <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="game.html" class="active" aria-current="page">Games</a></li>
+        </ul>
+    </nav>
+</header>
 
 <main class="game-container">
     <section class="resource-section">
@@ -27,8 +27,8 @@
         <!-- Gold Row -->
         <div class="shop-row">
             <div class="shop-col">
-                <button id="find-gold-btn" type="button">Find Gold!</button> 
-                <p class="stat-text">Gold = <span id="gold-count">0</span></p>   
+                <button id="find-gold-btn" type="button">Find Gold!</button>
+                <p class="stat-text">Gold = <span id="gold-count" aria-live="polite">0</span></p>
             </div>
             <div class="shop-col">
                 <!-- Empty second column for alignment -->
@@ -38,34 +38,88 @@
         <!-- Axe Row -->
         <div class="shop-row">
             <div class="shop-col">
-                <button id="buy-axe-btn" type="button">Buy Axe</button>    
-                <p class="stat-text">Durability - <span id="axe-count">0</span></p>
+                <button id="buy-axe-btn" type="button">Buy Axe</button>
+                <p class="stat-text">Durability - <span id="axe-count" aria-live="polite">0</span></p>
             </div>
             <div class="shop-col">
                 <button id="chop-wood-btn" type="button">Chop Wood</button>
-                <p class="stat-text">Wood = <span id="wood-count">0</span></p>
+                <p class="stat-text">Wood = <span id="wood-count" aria-live="polite">0</span></p>
             </div>
         </div>
 
         <!-- Pickaxe Row -->
         <div class="shop-row">
             <div class="shop-col">
-                <button id="buy-pickaxe-btn" type="button">Buy Pickaxe</button>    
-                <p class="stat-text">Durability - <span id="pickaxe-count">0</span></p>
+                <button id="buy-pickaxe-btn" type="button">Buy Pickaxe</button>
+                <p class="stat-text">Durability - <span id="pickaxe-count" aria-live="polite">0</span></p>
             </div>
             <div class="shop-col">
-                <!-- Ready for future mining action -->
+                <button id="mine-ore-btn" type="button">Mine Ore</button>
+                <p class="stat-text">Stone = <span id="ore-count" aria-live="polite">0</span></p>
             </div>
         </div>
 
         <!-- Knife Row -->
         <div class="shop-row">
             <div class="shop-col">
-                <button id="buy-knife-btn" type="button">Buy Knife</button>    
-                <p class="stat-text">Durability - <span id="knife-count">0</span></p>
+                <button id="buy-knife-btn" type="button">Buy Knife</button>
+                <p class="stat-text">Durability - <span id="knife-count" aria-live="polite">0</span></p>
             </div>
             <div class="shop-col">
-                <!-- Ready for future hunting/crafting action -->
+                <button id="hunt-food-btn" type="button">Hunt Food</button>
+                <p class="stat-text">Food = <span id="food-count" aria-live="polite">0</span></p>
+            </div>
+        </div>
+
+        <!-- Explore Row -->
+        <div class="shop-row">
+            <div class="shop-col">
+                <button id="explore-btn" type="button">Explore</button>
+                <p class="stat-text">Life <span id="life-count" aria-live="polite">0</span> - <span id="max-life">10</span></p>
+            </div>
+            <div class="shop-col">
+                <p class="stat-text">Experience = <span id="exp-count" aria-live="polite">0</span></p>
+            </div>
+        </div>
+
+        <!-- Bank Section -->
+        <div class="shop-row bank-section">
+            <div class="shop-col">
+                <h3>Bank</h3>
+                <p class="stat-text">Bank Balance: <span id="bank-count" aria-live="polite">0</span></p>
+                <p class="stat-text">Interest: <span id="rate-count" aria-live="polite">0</span> gold/sec</p>
+            </div>
+            <div class="shop-col">
+                <button id="deposit-btn" type="button">Deposit 10 Gold</button>
+                <button id="withdraw-btn" type="button">Withdraw All</button>
+            </div>
+        </div>
+
+        <!-- Equipment & Stats Section -->
+        <div class="shop-row equipment-section">
+            <div class="shop-col">
+                <h3>Equipped Gear</h3>
+                <ul id="equipment-list" style="list-style: none; padding: 0;">
+                    <!-- Dynamically populated -->
+                </ul>
+            </div>
+            <div class="shop-col">
+                <h3>Stat Buffs</h3>
+                <p class="stat-text">Stamina: +<span id="buff-stamina">0</span></p>
+                <p class="stat-text">Strength: +<span id="buff-strength">0</span></p>
+                <p class="stat-text">Attack: +<span id="buff-attack">0</span></p>
+                <p class="stat-text">Defense: +<span id="buff-defense">0</span></p>
+            </div>
+        </div>
+
+        <!-- Inventory Section -->
+        <div class="shop-row inventory-section">
+            <div class="shop-col" style="grid-column: span 2;">
+                <h3>Inventory (<span id="inventory-count">0</span>/5)</h3>
+                <p id="explore-msg" class="stat-text" style="color: #ffd700; font-weight: bold;"></p>
+                <ul id="inventory-list" style="list-style: none; padding: 0;">
+                    <!-- Dynamically populated -->
+                </ul>
             </div>
         </div>
 
